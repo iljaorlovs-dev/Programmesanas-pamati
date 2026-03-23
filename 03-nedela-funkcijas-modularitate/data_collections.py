@@ -1,18 +1,18 @@
-# --- A daļa — Saraksti ---
+# --- Part A — Lists ---
 print("--- Lists ---")
 
 numbers = [2, 4, 6, 8, 10]
 
-# Добавляем элемент
+# Add an element
 numbers.append(12)
 
-# Удаляем последний элемент
+# Remove the last element
 removed_number = numbers.pop()
 
 print(f"Original list after append() and pop(): {numbers}")
 print(f"Removed element: {removed_number}")
 
-# Ручной подсчёт суммы и количества элементов
+# Manually calculate the sum and count of elements
 total = 0
 count = 0
 
@@ -24,7 +24,7 @@ average = total / count
 
 print(f"Sum: {total}, Average: {average}")
 
-# Фильтрация: только чётные числа
+# Filter only even numbers
 even_numbers = []
 
 for number in numbers:
@@ -33,7 +33,7 @@ for number in numbers:
 
 print(f"Even numbers: {even_numbers}")
 
-# Срезы
+# Slices
 first_three = numbers[:3]
 last_two = numbers[-2:]
 every_second = numbers[::2]
@@ -43,29 +43,28 @@ print(f"Last 2: {last_two}")
 print(f"Every second element: {every_second}")
 
 
-
-
-# --- B daļa — Vārdnīcas ---
+# --- Part B — Dictionaries ---
 print("\n--- Dictionaries ---")
+
 students = {
     "Anna": 85,
     "Jānis": 72,
     "Līga": 95
 }
-# Добавляем нового студента
+
+# Add a new student
 students["Pēteris"] = 88
 print(f"Students after adding Pēteris: {students}")
 
-# Меняем существующую оценку
+# Update existing grades
 students["Jānis"] = 78
 students["Pēteris"] = 99
 
-# Вывод всех студентов
+# Print all students and their grades
 for name, grade in students.items():
     print(f"{name}: {grade}")
 
-
-# Поиск лучшего студента вручную
+# Find the best student manually
 best_name = ""
 best_grade = -1
 
@@ -77,15 +76,14 @@ for name, grade in students.items():
 print(f"Best student: {best_name} ({best_grade})")
 
 
-
-######## --- C daļa — Kombinācija --- ########################################
+# --- Part C — Combination ---
 print("\n--- Students with grade >= 80 ---")
 
 student_list = [
     {"name": "Anna", "grade": 85},
     {"name": "Jānis", "grade": 78},
     {"name": "Līga", "grade": 95},
-    {"name": "Pēteris", "grade": 88}
+    {"name": "Pēteris", "grade": 99}
 ]
 
 good_students = []
