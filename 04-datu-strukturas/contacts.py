@@ -2,9 +2,10 @@ import sys
 import json
 import os
 
+#contacts file name
+CONTACTS_FILE = "contacts.json"
 
-
-#autocreate json file
+#autocreate json file if it doesn't exist
 if not os.path.exists(CONTACTS_FILE):
     save_contacts([])
 
