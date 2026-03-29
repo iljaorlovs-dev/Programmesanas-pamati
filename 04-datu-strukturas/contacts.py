@@ -1,3 +1,13 @@
+import sys
+import json
+import os
+
+
+
+#autocreate json file
+if not os.path.exists(CONTACTS_FILE):
+    save_contacts([])
+
 #contacts loading
 
 def load_contacts():
@@ -61,4 +71,21 @@ def search_contacts(query):
         print(f"  {i}. {contact['name']} — {contact['phone']}")
 
 
+#CLI added
+if __name__ == "__main__":
+    command = sys.argv[1]
 
+    if command == "add":
+        name = sys.argv[2]
+        phone = sys.argv[3]
+        add_contact(name, phone)
+
+    elif command == "list":
+        list_contacts()
+
+    elif command == "search":
+        query = sys.argv[2]
+        search_contacts(query)
+
+    else:
+        print("Nezināma komanda.")
