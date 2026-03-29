@@ -32,23 +32,68 @@ def save_contacts(contacts):
         json.dump(contacts, f, indent=2, ensure_ascii=False)
 
 
+def is_valid_name(name):
+    """
+    Allow letters (including Latvian), spaces, and hyphens.
+    """
+    name = name.strip()
+
+    for char in name:
+        if not (char.isalpha() or char in [" ", "-"]):
+            return False
+
+    return True
+
+
+def is_valid_phone(phone):
+    """
+    Check if phone has format: +countrycode number
+    Example: +371 12345678
+    """
+    parts = phone.split()
+
+    # must be 2 parts: +code and number
+    if len(parts) != 2:
+        return False
+
+    country_code, number = parts
+
+    # check country code starts with + and digits after
+    if not country_code.startswith("+") or not country_code[1:].isdigit():
+        return False
+
+    # check number is digits and max 8 digits
+    if not number.isdigit() or len(number) > 8:
+        return False
+
+    return True
+
+
+
 def add_contact(name, phone):
     """
-    Add a new contact to the list.
+    Add a new contact to the list with validation.
     """
-    # load existing contacts
+
+    # validate name
+    if not is_valid_name(name):
+        print("Error: Name must contain only letters and spaces.")
+        return
+
+    # validate phone
+    if not is_valid_phone(phone):
+        print("Error: Phone must be in format +XXX XXXXXXXX (max 8 digits).")
+        return
+
     contacts = load_contacts()
 
-    # add new contact (dictionary)
     contacts.append({
         "name": name,
         "phone": phone
     })
 
-    # save updated list back to file
     save_contacts(contacts)
 
-    # print confirmation message
     print(f"✓ Pievienots: {name} ({phone})")
 
 
