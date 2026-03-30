@@ -7,13 +7,16 @@ FILE_NAME = "shopping.json"
 def load_list():
     """
     Загружает список покупок из файла.
-    Если файла нет — возвращает пустой список.
+    Если файл пустой или сломан — возвращает пустой список.
     """
     if not os.path.exists(FILE_NAME):
         return []
 
-    with open(FILE_NAME, "r", encoding="utf-8") as file:
-        return json.load(file)
+    try:
+        with open(FILE_NAME, "r", encoding="utf-8") as file:
+            return json.load(file)
+    except json.JSONDecodeError:
+        return []
 
 
 def save_list(items):
