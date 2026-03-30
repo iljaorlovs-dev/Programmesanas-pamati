@@ -83,14 +83,14 @@ if command == "add":
     else:
         add_item(args[2], args[3], args[4])
 
-    elif command == "list":
-        show_list()
+elif command == "list":
+    show_list()
 
-    elif command == "total":
-        total()
+elif command == "total":
+    total()
 
-    elif command == "clear":
-        clear()
+elif command == "clear":
+    clear()
 
-    else:
-        print("Unknown command")
+else:
+    print("Unknown command")
