@@ -1,27 +1,38 @@
 import sys
 from storage import load_list, save_list
+from utils import calc_line_total, calc_grand_total, count_units
 
 
-def add_item(name, price):
-    """
-    Добавляет товар в список.
-    """
+def add_item(name, qty, price):
     items = load_list()
 
-    items.append({
-        "name": name,
-        "price": float(price)
-    })
+    try:
+        qty = int(qty)
+        price = float(price)
 
+        if qty <= 0:
+            print("Quantity must be positive")
+            return
+
+    except ValueError:
+        print("Invalid number")
+        return
+
+    item = {
+        "name": name,
+        "qty": qty,
+        "price": price
+    }
+
+    items.append(item)
     save_list(items)
 
-    print(f"✓ Added: {name} ({price} EUR)")
+    line_total = calc_line_total(item)
+
+    print(f"✓ Added: {name} × {qty} ({price:.2f} EUR/unit) = {line_total:.2f} EUR")
 
 
 def show_list():
-    """
-    Показывает список покупок.
-    """
     items = load_list()
 
     if not items:
@@ -29,19 +40,23 @@ def show_list():
         return
 
     print("Shopping list:")
+
     for i, item in enumerate(items, start=1):
-        print(f"  {i}. {item['name']} — {item['price']:.2f} EUR")
+        line_total = calc_line_total(item)
+
+        print(f"  {i}. {item['name']} × {item['qty']} — "
+              f"{item['price']:.2f} EUR/unit — {line_total:.2f} EUR")
 
 
 def total():
-    """
-    Считает общую сумму.
-    """
     items = load_list()
 
-    total_price = sum(item["price"] for item in items)
+    total_price = calc_grand_total(items)
+    total_units = count_units(items)
 
-    print(f"Total: {total_price:.2f} EUR ({len(items)} items)")
+    print(f"Total: {total_price:.2f} EUR "
+          f"({total_units} units, {len(items)} products)")
+    
 
 
 def clear():
