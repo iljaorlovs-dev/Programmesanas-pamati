@@ -6,6 +6,7 @@ from utils import calc_line_total, calc_grand_total, count_units
 def add_item(name, qty):
     items = load_list()
 
+    # 🔢 Проверка количества
     try:
         qty = int(qty)
         if qty <= 0:
@@ -15,8 +16,9 @@ def add_item(name, qty):
         print("Invalid quantity")
         return
 
-    # 🔍 ищем цену
-    price = get_price(name)
+    # 🔍 ищем цену (делаем name маленьким для стабильности)
+    name_key = name.lower()
+    price = get_price(name_key)
 
     if price is not None:
         print(f"Found price: {price:.2f} EUR/unit")
@@ -29,7 +31,7 @@ def add_item(name, qty):
                 if price <= 0:
                     print("Price must be positive")
                     return
-                set_price(name, price)
+                set_price(name_key, price)
                 print(f"✓ Price updated: {name} → {price:.2f} EUR")
             except ValueError:
                 print("Invalid price")
@@ -42,21 +44,23 @@ def add_item(name, qty):
             if price <= 0:
                 print("Price must be positive")
                 return
-            set_price(name, price)
+            set_price(name_key, price)
             print(f"✓ Price saved: {name} ({price:.2f} EUR)")
         except ValueError:
             print("Invalid price")
             return
 
-    # 🔁 объединение товаров (как делали раньше)
+    # 🔁 объединение товаров
     for item in items:
-        if item["name"].lower() == name.lower():
+        if item["name"].lower() == name_key:
             item["qty"] += qty
             save_list(items)
+
             line_total = calc_line_total(item)
             print(f"✓ Updated: {name} × {item['qty']} = {line_total:.2f} EUR")
             return
 
+    # ➕ новый товар
     item = {
         "name": name,
         "qty": qty,
@@ -89,18 +93,18 @@ def show_list():
 def total():
     items = load_list()
 
+    if not items:
+        print("Shopping list is empty.")
+        return
+
     total_price = calc_grand_total(items)
     total_units = count_units(items)
 
     print(f"Total: {total_price:.2f} EUR "
           f"({total_units} units, {len(items)} products)")
-    
 
 
 def clear():
-    """
-    Очищает список.
-    """
     save_list([])
     print("✓ List cleared")
 
@@ -115,25 +119,20 @@ if __name__ == "__main__":
 
     command = args[1]
 
+    if command == "add":
+        if len(args) != 4:
+            print("Usage: add <name> <qty>")
+        else:
+            add_item(args[2], args[3])
 
+    elif command == "list":
+        show_list()
 
-##########CLI команды##########
+    elif command == "total":
+        total()
 
+    elif command == "clear":
+        clear()
 
-if command == "add":
-    if len(args) != 4:
-        print("Usage: add <name> <qty>")
     else:
-        add_item(args[2], args[3])
-
-elif command == "list":
-    show_list()
-
-elif command == "total":
-    total()
-
-elif command == "clear":
-    clear()
-
-else:
-    print("Unknown command")
+        print("Unknown command")
