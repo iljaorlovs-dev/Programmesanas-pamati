@@ -78,10 +78,10 @@ if __name__ == "__main__":
     command = args[1]
 
     if command == "add":
-        if len(args) != 4:
-            print("Usage: add <name> <price>")
-        else:
-            add_item(args[2], args[3])
+    if len(args) != 5:
+        print("Usage: add <name> <qty> <price>")
+    else:
+        add_item(args[2], args[3], args[4])
 
     elif command == "list":
         show_list()
