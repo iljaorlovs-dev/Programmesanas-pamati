@@ -1,18 +1,17 @@
 [
   {
+    "name": "Piens",
+    "qty": 1,
+    "price": 2.0
+  },
+  {
+    "name": "Piens",
+    "qty": 2,
+    "price": 9.0
+  },
+  {
     "name": "Maize",
-    "price": 1.2
-  },
-  {
-    "name": "piens",
-    "price": 99.0
-  },
-  {
-    "name": "degviela",
-    "price": 100.0
-  },
-  {
-    "name": "Kārums",
-    "price": 1.5
+    "qty": 1,
+    "price": 1.2444
   }
 ]
