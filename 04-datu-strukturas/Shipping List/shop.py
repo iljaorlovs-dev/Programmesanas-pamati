@@ -77,7 +77,7 @@ if __name__ == "__main__":
 
     command = args[1]
 
-    if command == "add":
+if command == "add":
     if len(args) != 5:
         print("Usage: add <name> <qty> <price>")
     else:
