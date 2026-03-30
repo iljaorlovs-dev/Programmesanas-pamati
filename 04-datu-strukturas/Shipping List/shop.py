@@ -3,20 +3,59 @@ from storage import load_list, save_list
 from utils import calc_line_total, calc_grand_total, count_units
 
 
-def add_item(name, qty, price):
+def add_item(name, qty):
     items = load_list()
 
     try:
         qty = int(qty)
-        price = float(price)
-
         if qty <= 0:
             print("Quantity must be positive")
             return
-
     except ValueError:
-        print("Invalid number")
+        print("Invalid quantity")
         return
+
+    # 🔍 ищем цену
+    price = get_price(name)
+
+    if price is not None:
+        print(f"Found price: {price:.2f} EUR/unit")
+
+        choice = input("[A]ccept / [M]odify? > ").strip().lower()
+
+        if choice == "m":
+            try:
+                price = float(input("New price: > "))
+                if price <= 0:
+                    print("Price must be positive")
+                    return
+                set_price(name, price)
+                print(f"✓ Price updated: {name} → {price:.2f} EUR")
+            except ValueError:
+                print("Invalid price")
+                return
+
+    else:
+        print("Price not found.")
+        try:
+            price = float(input("Enter price: > "))
+            if price <= 0:
+                print("Price must be positive")
+                return
+            set_price(name, price)
+            print(f"✓ Price saved: {name} ({price:.2f} EUR)")
+        except ValueError:
+            print("Invalid price")
+            return
+
+    # 🔁 объединение товаров (как делали раньше)
+    for item in items:
+        if item["name"].lower() == name.lower():
+            item["qty"] += qty
+            save_list(items)
+            line_total = calc_line_total(item)
+            print(f"✓ Updated: {name} × {item['qty']} = {line_total:.2f} EUR")
+            return
 
     item = {
         "name": name,
@@ -28,7 +67,6 @@ def add_item(name, qty, price):
     save_list(items)
 
     line_total = calc_line_total(item)
-
     print(f"✓ Added: {name} × {qty} ({price:.2f} EUR/unit) = {line_total:.2f} EUR")
 
 
@@ -77,11 +115,16 @@ if __name__ == "__main__":
 
     command = args[1]
 
+
+
+##########CLI команды##########
+
+
 if command == "add":
-    if len(args) != 5:
-        print("Usage: add <name> <qty> <price>")
+    if len(args) != 4:
+        print("Usage: add <name> <qty>")
     else:
-        add_item(args[2], args[3], args[4])
+        add_item(args[2], args[3])
 
 elif command == "list":
     show_list()
