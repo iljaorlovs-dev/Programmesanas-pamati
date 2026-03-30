@@ -1,5 +1,5 @@
 import sys
-from storage import load_list, save_list
+from storage import load_list, save_list, get_price, set_price
 from utils import calc_line_total, calc_grand_total, count_units
 
 
