@@ -25,17 +25,20 @@ def add_expense(expenses):
     """Add a new expense with validation and retry."""
 
     # --- DATE ---
-    while True:
-        date = input("Datums (YYYY-MM-DD): ").strip()
+while True:
+    date = input("Datums (YYYY-MM-DD): ").strip()
 
-        if date == "":
-            print("Datums nevar būt tukšs!")
-            continue
+    if date == "":
+        print("Datums nevar būt tukšs!")
+        continue
 
-        # (простая проверка, полноценную добавим позже)
-        if len(date) != 10 or date[4] != "-" or date[7] != "-":
-            print("Nepareizs datuma formāts! (YYYY-MM-DD)")
-            continue
+    try:
+        # Try to parse the date
+        datetime.strptime(date, "%Y-%m-%d")
+        break  # valid date
+
+    except ValueError:
+        print("Nepareizs datuma formāts vai neeksistējošs datums!")
 
         break
 
