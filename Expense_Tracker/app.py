@@ -1,6 +1,5 @@
 from storage import load_expenses, save_expenses
-from logic import sum_total
-from logic import is_valid_date
+from logic import sum_total, is_valid_date
 from datetime import date
 
 # Predefined categories
@@ -27,22 +26,20 @@ def add_expense(expenses):
     """Add a new expense with validation and retry."""
 
     # --- DATE ---
-today = date.today().strftime("%Y-%m-%d")
+    today = date.today().strftime("%Y-%m-%d")
 
-while True:
-    date_input = input(f"Datums (YYYY-MM-DD) [{today}]: ").strip()
+    while True:
+        date_input = input(f"Datums (YYYY-MM-DD) [{today}]: ").strip()
 
-    # if empty → use today
-    if date_input == "":
-        date_input = today
+        if date_input == "":
+            date_input = today
 
-    if is_valid_date(date_input):
-        date = date_input
-        break
-    else:
-        print("Nepareizs datums! Izmanto formātu YYYY-MM-DD.")
-
-        break
+        if is_valid_date(date_input):
+            expense_date = date_input
+            break
+        else:
+            print("Nepareizs datums! Izmanto formātu YYYY-MM-DD.")
+            continue
 
     # --- CATEGORY ---
     while True:
@@ -72,7 +69,6 @@ while True:
             print("Summa nevar būt tukša!")
             continue
 
-        # normalize comma → dot
         amount_input = amount_input.replace(",", ".")
 
         try:
@@ -92,7 +88,7 @@ while True:
 
     # --- CREATE RECORD ---
     expense = {
-        "date": date,
+        "date": expense_date,
         "amount": amount,
         "category": category,
         "description": description,
@@ -102,24 +98,35 @@ while True:
     expenses.append(expense)
     save_expenses(expenses)
 
-    print(f"\n✓ Pievienots: {date} | {category} | {amount:.2f} EUR | {description}")
+    print(f"\n✓ Pievienots: {expense_date} | {category} | {amount:.2f} EUR | {description}")
 
 
 def show_expenses(expenses):
-    """Display all expenses with total."""
+    """Display all expenses in a formatted table with numbering."""
 
     if not expenses:
         print("Nav datu.")
         return
 
-    print("\nDatums       Summa    Kategorija    Apraksts")
-    print("-" * 50)
+    # Table header
+    print("\n#  Datums       Summa     Kategorija           Apraksts")
+    print("-" * 65)
 
-    for e in expenses:
-        print(f"{e['date']}  {e['amount']:.2f}  {e['category']}  {e['description']}")
+    # Loop through expenses with numbering
+    for i, e in enumerate(expenses, 1):
+        date = e.get("date", "")
+        amount = e.get("amount", 0)
+        category = e.get("category", "")
+        description = e.get("description", "")
 
-    print("-" * 50)
-    print(f"Kopā: {sum_total(expenses):.2f} EUR")
+        # Format output with fixed width columns
+        print(f"{i:<2} {date:<12} {amount:>8.2f}   {category:<20} {description}")
+
+    print("-" * 65)
+
+    # Total
+    total = sum_total(expenses)
+    print(f"Kopā: {total:.2f} EUR ({len(expenses)} ieraksti)")
 
 
 def main():
