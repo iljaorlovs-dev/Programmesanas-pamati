@@ -1,5 +1,7 @@
 from storage import load_expenses, save_expenses
 from logic import sum_total
+from logic import is_valid_date
+from datetime import date
 
 # Predefined categories
 CATEGORIES = [
@@ -25,20 +27,20 @@ def add_expense(expenses):
     """Add a new expense with validation and retry."""
 
     # --- DATE ---
+today = date.today().strftime("%Y-%m-%d")
+
 while True:
-    date = input("Datums (YYYY-MM-DD): ").strip()
+    date_input = input(f"Datums (YYYY-MM-DD) [{today}]: ").strip()
 
-    if date == "":
-        print("Datums nevar būt tukšs!")
-        continue
+    # if empty → use today
+    if date_input == "":
+        date_input = today
 
-    try:
-        # Try to parse the date
-        datetime.strptime(date, "%Y-%m-%d")
-        break  # valid date
-
-    except ValueError:
-        print("Nepareizs datuma formāts vai neeksistējošs datums!")
+    if is_valid_date(date_input):
+        date = date_input
+        break
+    else:
+        print("Nepareizs datums! Izmanto formātu YYYY-MM-DD.")
 
         break
 

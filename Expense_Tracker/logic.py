@@ -25,3 +25,28 @@ def sum_total(expenses):
 
     # Step 5: Round result to 2 decimal places (money format)
     return round(total, 2)
+
+
+from datetime import datetime
+
+
+#datetime module
+def is_valid_date(text):
+    """
+    Check if the given string is a valid date in YYYY-MM-DD format.
+
+    Args:
+        text (str): Date string entered by the user.
+
+    Returns:
+        bool: True if valid, False otherwise.
+    """
+
+    try:
+        # Try to parse the string into a date
+        datetime.strptime(text, "%Y-%m-%d")
+        return True
+
+    except ValueError:
+        # If parsing fails → invalid date
+        return False
