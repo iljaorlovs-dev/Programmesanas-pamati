@@ -38,3 +38,7 @@ app.py
 
 
 #Lietošanas scenāriji
+Kad tiek ievādītas izmaksas, programma tos saglābā json failā.
+Programma apstiprina, ka izmaksas ir saglābatas.
+Ja tiek ievādīts nepareizais formāts, programma nepārtāj strādāt un rāda attiecīgu formāta kļūdu. Katrā rindā būtu labi paradīt gaidāmo datu formātu (piem lai nesajauktu , un . ciparos). Jāparedz visādas kļūdas- negatīvas vertības, drukas kļūdas, tukšas vertības.
+Json fails veidojas automātiski un ja tur nav datu, programma rāda, ka dati ir tukši.
