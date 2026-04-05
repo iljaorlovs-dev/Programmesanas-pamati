@@ -9,4 +9,10 @@ Programma ļauj pierakstīt izmaksas lietojot CLI, kā arī pārvaldīt tos pier
 ├── export.py     # CSV eksports 
 └── expenses.json # Dati (izveidojas automātiski) 
 
+#Datu struktūra
+Plānotā datus struktūra - vienkāršākā ar tikai vajadīgiem datiem:
+    "date": "2025-02-15",
+    "amount": 12.50,
+    "category": "Ēdiens",
+    "description": "Pusdienas"
 
