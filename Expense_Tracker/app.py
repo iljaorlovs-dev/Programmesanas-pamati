@@ -22,41 +22,68 @@ def show_menu():
 
 
 def add_expense(expenses):
-    """Add a new expense to the list."""
+    """Add a new expense with validation and retry."""
 
     # --- DATE ---
-    date = input("Datums (YYYY-MM-DD): ")
+    while True:
+        date = input("Datums (YYYY-MM-DD): ").strip()
+
+        if date == "":
+            print("Datums nevar būt tukšs!")
+            continue
+
+        # (простая проверка, полноценную добавим позже)
+        if len(date) != 10 or date[4] != "-" or date[7] != "-":
+            print("Nepareizs datuma formāts! (YYYY-MM-DD)")
+            continue
+
+        break
 
     # --- CATEGORY ---
-    print("Kategorija:")
-    for i, cat in enumerate(CATEGORIES, 1):
-        print(f"{i}) {cat}")
+    while True:
+        print("\nKategorija:")
+        for i, cat in enumerate(CATEGORIES, 1):
+            print(f"{i}) {cat}")
 
-    choice = input("Izvēlies kategoriju: ")
+        choice = input("Izvēlies kategoriju: ").strip()
 
-    try:
-        category = CATEGORIES[int(choice) - 1]
-    except (ValueError, IndexError):
-        print("Nepareiza kategorija!")
-        return
+        if not choice.isdigit():
+            print("Ievadi skaitli!")
+            continue
+
+        index = int(choice) - 1
+
+        if 0 <= index < len(CATEGORIES):
+            category = CATEGORIES[index]
+            break
+        else:
+            print("Nepareiza izvēle!")
 
     # --- AMOUNT ---
-    amount_input = input("Summa (EUR): ")
+    while True:
+        amount_input = input("Summa (EUR): ").strip()
 
-    # normalize comma to dot
-    amount_input = amount_input.replace(",", ".")
+        if amount_input == "":
+            print("Summa nevar būt tukša!")
+            continue
 
-    try:
-        amount = float(amount_input)
-        if amount <= 0:
-            print("Summai jābūt pozitīvai!")
-            return
-    except ValueError:
-        print("Nepareiza summa!")
-        return
+        # normalize comma → dot
+        amount_input = amount_input.replace(",", ".")
+
+        try:
+            amount = float(amount_input)
+
+            if amount <= 0:
+                print("Summai jābūt pozitīvai!")
+                continue
+
+            break
+
+        except ValueError:
+            print("Nepareiza summa!")
 
     # --- DESCRIPTION ---
-    description = input("Apraksts: ")
+    description = input("Apraksts (var būt tukšs): ").strip()
 
     # --- CREATE RECORD ---
     expense = {
@@ -70,7 +97,7 @@ def add_expense(expenses):
     expenses.append(expense)
     save_expenses(expenses)
 
-    print(f"✓ Pievienots: {date} | {category} | {amount:.2f} EUR | {description}")
+    print(f"\n✓ Pievienots: {date} | {category} | {amount:.2f} EUR | {description}")
 
 
 def show_expenses(expenses):
