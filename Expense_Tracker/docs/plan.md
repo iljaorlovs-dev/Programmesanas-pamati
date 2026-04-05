@@ -44,3 +44,34 @@ Programma apstiprina, ka izmaksas ir saglābatas.
 Ja tiek ievādīts nepareizais formāts, programma nepārtāj strādāt un rāda attiecīgu formāta kļūdu (piemēram, lietotājs ievada nepareizu datumu (piem. 2025/02/15).
 Programma parāda kļūdu un lūdz ievadīt vēlreiz.). Katrā rindā būtu labi paradīt gaidāmo datu formātu (piem lai nesajauktu , un . ciparos). Jāparedz visādas kļūdas- negatīvas vertības (Lietotājs pievieno izdevumu ar negatīvu summu -> programma nepieņem ievadi un parāda kļūdu), drukas kļūdas, tukšas vertības.
 Json fails veidojas automātiski un ja tur nav datu, programma rāda, ka dati ir tukši (ja lietotājs izvēlas “Parādīt izdevumus”, bet saraksts ir tukšs. Programma parāda ziņu: “Nav datu”).
+
+
+
+#Algoritmu piemēri
+    1. Programma prasa ievadīt datumu (YYYY-MM-DD)
+
+    2. Ja datums ir tukšs vai nepareizā formātā
+    → parāda kļūdu un prasa ievadīt vēlreiz
+
+    3. Programma prasa ievadīt summu
+
+    4. Aizvieto "," ar "." (normalizācija)
+
+    5. Ja summa nav skaitlis vai <= 0
+    → parāda kļūdu un prasa ievadīt vēlreiz
+
+    6. Programma parāda kategoriju sarakstu
+
+    7. Lietotājs izvēlas kategoriju
+    Ja izvēle nav derīga
+    → piedāvā ievadīt jaunu kategoriju
+
+    8. Programma prasa aprakstu (var būt tukšs)
+
+    9. Izveido ierakstu (dict)
+
+    10. Pievieno ierakstu sarakstam
+
+    11. Saglabā JSON failā
+
+    12. Parāda apstiprinājumu
