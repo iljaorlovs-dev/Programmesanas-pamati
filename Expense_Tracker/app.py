@@ -114,13 +114,15 @@ def show_expenses(expenses):
 
     # Loop through expenses with numbering
     for i, e in enumerate(expenses, 1):
-        date = e.get("date", "")
+        exp_date = e.get("date", "")
         amount = e.get("amount", 0)
         category = e.get("category", "")
         description = e.get("description", "")
+        if len(description) > 20:
+            description = description[:17] + "..."
 
         # Format output with fixed width columns
-        print(f"{i:<2} {date:<12} {amount:>8.2f}   {category:<20} {description}")
+        print(f"{i:<2} {exp_date:<12} {amount:>8.2f}   {category:<20} {description}")
 
     print("-" * 65)
 
