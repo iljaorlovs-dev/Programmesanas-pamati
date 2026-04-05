@@ -10,5 +10,17 @@
     "amount": 9e-12,
     "category": "Veselība",
     "description": "Teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeest"
+  },
+  {
+    "date": "2025-04-05",
+    "amount": 1.0,
+    "category": "Ēdiens",
+    "description": "bulciņa"
+  },
+  {
+    "date": "1990-01-01",
+    "amount": 0.01,
+    "category": "Transports",
+    "description": "autobuss"
   }
 ]
