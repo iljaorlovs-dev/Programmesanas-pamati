@@ -81,3 +81,63 @@ def is_valid_date(text):
     except ValueError:
         # If parsing fails → invalid date
         return False
+    
+
+
+#TOTALS dictionary to store totals for each category
+def sum_by_category(expenses):
+    """
+    Calculate total amount per category.
+
+    Args:
+        expenses (list): List of expense dictionaries
+
+    Returns:
+        dict: {category: total_amount}
+    """
+
+    totals = {}
+
+    for expense in expenses:
+        # Get category and amount safely
+        category = expense.get("category", "Cits")
+        amount = expense.get("amount", 0)
+
+        # If category already exists → add
+        if category in totals:
+            totals[category] += amount
+        else:
+            # If not → create new entry
+            totals[category] = amount
+
+    # Round values to 2 decimal places
+    for cat in totals:
+        totals[cat] = round(totals[cat], 2)
+
+    return totals
+
+
+
+def get_available_months(expenses):
+    """
+    Return a sorted list of unique months (YYYY-MM) from expenses.
+
+    Args:
+        expenses (list): List of expense dictionaries
+
+    Returns:
+        list: Sorted list of months as strings
+    """
+
+    months = set()
+
+    for expense in expenses:
+        date_str = expense.get("date", "")
+
+        # Extract YYYY-MM
+        if len(date_str) >= 7:
+            month = date_str[:7]
+            months.add(month)
+
+    # Return sorted list
+    return sorted(months)

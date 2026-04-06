@@ -14,3 +14,5 @@ Show expenses funkcija optimizēta ar MI palīdzību turpmākām darbībām ar i
 Date nav ieteicams lietot, jo tas konfliktē ar "date" instrumentu, date aizvietots ar expense_date
 
 ## 3. solis: Filtrēšana, kopsavilkums un dzēšana
+sum_by_category - tiek pievienota atsevišķa vardnīca TOTALS logic.py
+get_available_months() taisa set ar unikālām vērtībām logic.py
