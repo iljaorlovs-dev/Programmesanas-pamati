@@ -19,6 +19,6 @@ get_available_months() taisa set ar unikālām vērtībām logic.py, bet lietot�
 App.py uzsākta delete_expenses funkcija. Python lieto nulli kā sākumskaitli (bet lietotāj redz 1 kā sākumskatli), removed = expenses.pop(index - 1).
 Piemirsu atjaunot menu.
 
-## 4. solis: CSV export
+## 4. solis: CSV exports
 s
 
