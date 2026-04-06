@@ -12,3 +12,5 @@ Logic.py - apaļošana notiek galā rezultātā, lai aprēķins būtu matemātis
 Datuma validācija noņemta no app.py un ievietota logic.py kā atsevišķa funkcija (jo nav saistīta ar input/output).
 Show expenses funkcija optimizēta ar MI palīdzību turpmākām darbībām ar ierakstiem, lai paradītos tabula.
 Date nav ieteicams lietot, jo tas konfliktē ar "date" instrumentu, date aizvietots ar expense_date
+
+## 3. solis: Filtrēšana, kopsavilkums un dzēšana

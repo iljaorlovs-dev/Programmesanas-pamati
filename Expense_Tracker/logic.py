@@ -1,3 +1,34 @@
+from datetime import datetime
+
+def filter_by_month(expenses, year, month):
+    """
+    Return expenses for a specific year and month.
+
+    Args:
+        expenses (list): List of expense dictionaries
+        year (int): Year to filter
+        month (int): Month to filter
+
+    Returns:
+        list: Filtered expenses
+    """
+
+    result = []
+
+    for expense in expenses:
+        # Convert string to datetime
+        d = datetime.strptime(expense["date"], "%Y-%m-%d")
+
+        # Check year and month
+        if d.year == year and d.month == month:
+            result.append(expense)
+
+    return result
+
+
+
+
+
 def sum_total(expenses):
     """
     Calculate the total sum of all expenses.
