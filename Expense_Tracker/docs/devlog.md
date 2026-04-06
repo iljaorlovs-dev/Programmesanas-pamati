@@ -20,9 +20,14 @@ get_available_months() taisa set ar unikālām vērtībām logic.py, bet lietot�
 App.py uzsākta delete_expenses funkcija. Python lieto nulli kā sākumskaitli (bet lietotāj redz 1 kā sākumskatli), removed = expenses.pop(index - 1).
 Piemirsu atjaunot menu, tāpēc testēšana no sākuma nebija sekmīga, jo nebija jaunu opciju.
 Sarežģītākā daļa bija dzēšanas funkcija - vajadzēja pareizi apstrādāt lietotāja ievadi.
+Uzlabota app.py importa funkcija, apvienojot visus ierakstus no logic.py vienā komandā pēc MI ieteikumiem.
+Uzlabots storage.py ar json faila lokācijas piesaistīšanu.
+Logic.py bija palaisa gada un mēneša validācija, Chat gpt tas bija ok, Claude tas nepatika, pafiksēts.
 
 ## 4. solis: CSV exports
 Izveidoju export.py moduli ar funkciju eksportam uz CSV.
+Pievienota piespiedu .csv fomāta pievienošana.
+Pievienota aizsardzība no space nosaukumos.
 
 ## 5. README
 Garlaicīgākā daļa. Uzrakstīts ar MI.

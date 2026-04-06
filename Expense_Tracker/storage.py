@@ -2,7 +2,7 @@ import json
 import os
 
 # Name of the file where all expenses will be stored
-FILE_NAME = "expenses.json"
+FILE_NAME = os.path.join(os.path.dirname(__file__), "expenses.json")
 
 
 def load_expenses():

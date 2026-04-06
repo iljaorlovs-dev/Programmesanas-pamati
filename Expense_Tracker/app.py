@@ -98,6 +98,8 @@ def add_expense(expenses):
 
     # --- DESCRIPTION ---
     description = input("Apraksts (var būt tukšs): ").strip()
+    if not description:
+        description = "-"
 
     # --- CREATE RECORD ---
     expense = {
@@ -265,9 +267,11 @@ def export_expenses(expenses):
     if not filename.endswith(".csv"):
         filename += ".csv"
 
-    export_to_csv(expenses, filename)
-
-    print(f"✓ Eksportēts uz {filename}")
+    success = export_to_csv(expenses, filename)
+    if success:
+        print(f"✓ Eksportēts uz {filename}")
+    else:
+      print("Kļūda saglabājot failu!")
 
 
 

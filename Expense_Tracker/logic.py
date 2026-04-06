@@ -17,7 +17,10 @@ def filter_by_month(expenses, year, month):
 
     for expense in expenses:
         # Convert string to datetime
-        d = datetime.strptime(expense["date"], "%Y-%m-%d")
+        try:
+            d = datetime.strptime(expense["date"], "%Y-%m-%d")
+        except (ValueError, KeyError):
+            continue
 
         # Check year and month
         if d.year == year and d.month == month:
@@ -58,10 +61,6 @@ def sum_total(expenses):
     return round(total, 2)
 
 
-from datetime import datetime
-
-
-#datetime module
 def is_valid_date(text):
     """
     Check if the given string is a valid date in YYYY-MM-DD format.
@@ -121,23 +120,23 @@ def sum_by_category(expenses):
 def get_available_months(expenses):
     """
     Return a sorted list of unique months (YYYY-MM) from expenses.
-
-    Args:
-        expenses (list): List of expense dictionaries
-
-    Returns:
-        list: Sorted list of months as strings
     """
 
     months = set()
 
     for expense in expenses:
-        date_str = expense.get("date", "")
+        date_str = expense.get("date")
 
-        # Extract YYYY-MM
-        if len(date_str) >= 7:
-            month = date_str[:7]
-            months.add(month)
+        if not date_str:
+            continue
 
-    # Return sorted list
+        try:
+            d = datetime.strptime(date_str, "%Y-%m-%d")
+        except ValueError:
+            continue
+
+        # Safe extraction
+        month = d.strftime("%Y-%m")
+        months.add(month)
+
     return sorted(months)

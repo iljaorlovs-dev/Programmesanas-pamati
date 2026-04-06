@@ -10,17 +10,21 @@ def export_to_csv(expenses, filepath):
         filepath (str): Output file path
     """
 
-    with open(filepath, "w", newline="", encoding="utf-8-sig") as f:
-        writer = csv.writer(f)
+    try:
+        with open(filepath, "w", newline="", encoding="utf-8-sig") as f:
+            writer = csv.writer(f)
 
-        # Header row
-        writer.writerow(["Datums", "Summa", "Kategorija", "Apraksts"])
+            writer.writerow(["Datums", "Summa", "Kategorija", "Apraksts"])
 
-        # Data rows
-        for e in expenses:
-            writer.writerow([
-                e.get("date", ""),
-                f"{e.get('amount', 0):.2f}",
-                e.get("category", ""),
-                e.get("description", ""),
-            ])
+            for e in expenses:
+                writer.writerow([
+                    e.get("date", ""),
+                    e.get("amount", 0),
+                    e.get("category", ""),
+                    e.get("description", ""),
+                ])
+
+        return True
+
+    except OSError:
+        return False
