@@ -1,0 +1,18 @@
+                 [ SĀKT ]
+                    ↓
+        [ Ielādēt datus (JSON) ]
+                    ↓
+           [ Parādīt izvēlni ]
+                    ↓
+        ◇ Izvēlies darbību (1–7) ◇
+      ↙     ↓      ↓      ↓      ↓      ↓      ↘
+ [1 Piev] [2 Show] [3 Filtr] [4 Kops] [5 Dzēst] [6 CSV] [7 Iziet]
+      ↓       ↓       ↓        ↓        ↓        ↓        ↓
+      └───────┴───────┴────────┴────────┴────────┴────────┘
+                      ↓
+             [ Atpakaļ uz izvēlni ]
+                      ↓
+                   (cikls)
+
+                     7 →
+                   [ BEIGAS ]
