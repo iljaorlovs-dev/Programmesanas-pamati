@@ -19,7 +19,7 @@ def export_to_csv(expenses, filepath):
             for e in expenses:
                 writer.writerow([
                     e.get("date", ""),
-                    e.get("amount", 0),
+                    round(e.get("amount", 0), 2),
                     e.get("category", ""),
                     e.get("description", ""),
                 ])

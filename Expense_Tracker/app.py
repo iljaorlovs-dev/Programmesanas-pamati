@@ -271,7 +271,7 @@ def export_expenses(expenses):
     if success:
         print(f"✓ Eksportēts uz {filename}")
     else:
-      print("Kļūda saglabājot failu!")
+        print("Kļūda saglabājot failu!")
 
 
 
@@ -298,7 +298,7 @@ def main():
             show_summary_by_category(expenses)
 
         elif choice == "5":
-            delete_expense(expenses)    
+            delete_expense(expenses)
 
         elif choice == "6":
             export_expenses(expenses)

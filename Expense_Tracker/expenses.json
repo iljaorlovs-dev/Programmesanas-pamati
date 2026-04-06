@@ -34,5 +34,23 @@
     "amount": 12.0,
     "category": "Ēdiens",
     "description": "šašliks"
+  },
+  {
+    "date": "2026-04-06",
+    "amount": 55.0,
+    "category": "Izklaide",
+    "description": "Spotify"
+  },
+  {
+    "date": "2026-04-06",
+    "amount": 350.0,
+    "category": "Komunālie maksājumi",
+    "description": "elektríba"
+  },
+  {
+    "date": "2026-04-06",
+    "amount": 166.0,
+    "category": "Veselība",
+    "description": "Sportima"
   }
 ]

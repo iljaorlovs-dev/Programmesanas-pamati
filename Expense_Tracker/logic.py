@@ -82,8 +82,6 @@ def is_valid_date(text):
         return False
     
 
-
-#TOTALS dictionary to store totals for each category
 def sum_by_category(expenses):
     """
     Calculate total amount per category.
@@ -120,6 +118,10 @@ def sum_by_category(expenses):
 def get_available_months(expenses):
     """
     Return a sorted list of unique months (YYYY-MM) from expenses.
+    Args:
+    expenses (list): List of expense dictionaries
+    Returns:
+    list: Sorted list of months
     """
 
     months = set()
