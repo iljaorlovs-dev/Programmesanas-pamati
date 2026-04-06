@@ -12,13 +12,25 @@ Logic.py - apaļošana notiek galā rezultātā, lai aprēķins būtu matemātis
 Datuma validācija noņemta no app.py un ievietota logic.py kā atsevišķa funkcija (jo nav saistīta ar input/output).
 Show expenses funkcija optimizēta ar MI palīdzību turpmākām darbībām ar ierakstiem, lai paradītos tabula.
 Date nav ieteicams lietot, jo tas konfliktē ar "date" instrumentu, date aizvietots ar expense_date
+Izmantoju while ciklus ar atkārtotu ievadi un .get() drošai piekļuvei datiem
 
 ## 3. solis: Filtrēšana, kopsavilkums un dzēšana
 sum_by_category - tiek pievienota atsevišķa vardnīca TOTALS logic.py
 get_available_months() taisa set ar unikālām vērtībām logic.py, bet lietotājam atgriežam datus kā list (lai strādātu sorting).
 App.py uzsākta delete_expenses funkcija. Python lieto nulli kā sākumskaitli (bet lietotāj redz 1 kā sākumskatli), removed = expenses.pop(index - 1).
-Piemirsu atjaunot menu.
+Piemirsu atjaunot menu, tāpēc testēšana no sākuma nebija sekmīga, jo nebija jaunu opciju.
+Sarežģītākā daļa bija dzēšanas funkcija - vajadzēja pareizi apstrādāt lietotāja ievadi.
 
 ## 4. solis: CSV exports
-s
+Izveidoju export.py moduli ar funkciju eksportam uz CSV.
+
+## 5. README
+Garlaicīgākā daļa. Uzrakstīts ar MI.
+
+
+## 6. PS
+Nākotnē plāns pievienot:
+- grafisko interfeisu
+- datu importu
+- lietotāja autentifikāciju
 

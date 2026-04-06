@@ -1,8 +1,15 @@
 from storage import load_expenses, save_expenses
-from logic import sum_total, is_valid_date
 from datetime import date
-from logic import get_available_months, filter_by_month
-from logic import sum_by_category
+from export import export_to_csv
+from logic import (
+    sum_total,
+    is_valid_date,
+    get_available_months,
+    filter_by_month,
+    sum_by_category,
+)
+
+
 
 # Predefined categories
 CATEGORIES = [
@@ -23,6 +30,7 @@ def show_menu():
     print("3) Filtrēt pēc mēneša")
     print("4) Kopsavilkums pa kategorijām")
     print("5) Dzēst izdevumu")
+    print("6) Eksportēt CSV")
     print("7) Iziet")
     return input("\nIzvēlies: ")
 
@@ -232,7 +240,8 @@ def show_summary_by_category(expenses):
     print("\nKopsavilkums pa kategorijām:")
     print("-" * 35)
 
-    for category, amount in totals.items():
+    for category in sorted(totals):
+        amount = totals[category]
         print(f"{category:<20} {amount:>8.2f} EUR")
 
     print("-" * 35)
@@ -240,6 +249,26 @@ def show_summary_by_category(expenses):
     # Total sum
     total = sum_total(expenses)
     print(f"KOPĀ: {total:.2f} EUR")
+
+def export_expenses(expenses):
+    """Export expenses to CSV file."""
+
+    if not expenses:
+        print("Nav datu.")
+        return
+
+    filename = input("Ievadi faila nosaukumu (piem. expenses.csv): ").strip()
+
+    if filename == "":
+        filename = "expenses.csv"
+    
+    if not filename.endswith(".csv"):
+        filename += ".csv"
+
+    export_to_csv(expenses, filename)
+
+    print(f"✓ Eksportēts uz {filename}")
+
 
 
 
@@ -267,12 +296,15 @@ def main():
         elif choice == "5":
             delete_expense(expenses)    
 
+        elif choice == "6":
+            export_expenses(expenses)
+
         elif choice == "7":
             print("Uz redzēšanos!")
             break
 
         else:
-            print("Nepareiza izvēle!")
+            print("Nepareiza izvēle! Izvēlies 1-7.")
 
 
 if __name__ == "__main__":
