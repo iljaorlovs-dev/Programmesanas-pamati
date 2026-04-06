@@ -131,32 +131,6 @@ def show_expenses(expenses):
     print(f"Kopā: {total:.2f} EUR ({len(expenses)} ieraksti)")
 
 
-def main():
-    """Main program loop."""
-
-    expenses = load_expenses()
-
-    while True:
-        choice = show_menu()
-
-        if choice == "1":
-            add_expense(expenses)
-
-        elif choice == "2":
-            show_expenses(expenses)
-
-        elif choice == "7":
-            print("Uz redzēšanos!")
-            break
-
-        else:
-            print("Nepareiza izvēle!")
-
-
-if __name__ == "__main__":
-    main()
-
-
 def delete_expense(expenses):
     """Delete an expense by its number."""
 
@@ -190,3 +164,35 @@ def delete_expense(expenses):
             return
         else:
             print("Nepareizs numurs!")
+
+
+
+
+
+def main():
+    """Main program loop."""
+
+    expenses = load_expenses()
+
+    while True:
+        choice = show_menu()
+
+        if choice == "1":
+            add_expense(expenses)
+
+        elif choice == "2":
+            show_expenses(expenses)
+
+        elif choice == "5":
+            delete_expense(expenses)    
+
+        elif choice == "7":
+            print("Uz redzēšanos!")
+            break
+
+        else:
+            print("Nepareiza izvēle!")
+
+
+if __name__ == "__main__":
+    main()
