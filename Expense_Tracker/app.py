@@ -155,3 +155,38 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+def delete_expense(expenses):
+    """Delete an expense by its number."""
+
+    if not expenses:
+        print("Nav datu.")
+        return
+
+    print("\nIzdevumi:")
+
+    for i, e in enumerate(expenses, 1):
+        print(f"{i}) {e['date']} | {e['amount']:.2f} EUR | {e['category']} | {e['description']}")
+
+    while True:
+        choice = input("\nKuru dzēst? (numurs vai 0 lai atceltu): ").strip()
+
+        if not choice.isdigit():
+            print("Ievadi skaitli!")
+            continue
+
+        index = int(choice)
+
+        if index == 0:
+            print("Dzēšana atcelta.")
+            return
+
+        if 1 <= index <= len(expenses):
+            removed = expenses.pop(index - 1)
+            save_expenses(expenses)
+
+            print(f"\n✓ Dzēsts: {removed['date']} | {removed['amount']:.2f} EUR | {removed['category']} | {removed['description']}")
+            return
+        else:
+            print("Nepareizs numurs!")

@@ -16,3 +16,4 @@ Date nav ieteicams lietot, jo tas konfliktē ar "date" instrumentu, date aizviet
 ## 3. solis: Filtrēšana, kopsavilkums un dzēšana
 sum_by_category - tiek pievienota atsevišķa vardnīca TOTALS logic.py
 get_available_months() taisa set ar unikālām vērtībām logic.py, bet lietotājam atgriežam datus kā list (lai strādātu sorting).
+App.py uzsākta delete_expenses funkcija. Python lieto nulli kā sākumskaitli (bet lietotāj redz 1 kā sākumskatli), removed = expenses.pop(index - 1).
