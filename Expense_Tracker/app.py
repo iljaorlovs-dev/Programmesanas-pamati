@@ -2,6 +2,7 @@ from storage import load_expenses, save_expenses
 from logic import sum_total, is_valid_date
 from datetime import date
 from logic import get_available_months, filter_by_month
+from logic import sum_by_category
 
 # Predefined categories
 CATEGORIES = [
@@ -20,6 +21,7 @@ def show_menu():
     print("\n1) Pievienot izdevumu")
     print("2) Parādīt izdevumus")
     print("3) Filtrēt pēc mēneša")
+    print("4) Kopsavilkums pa kategorijām")
     print("5) Dzēst izdevumu")
     print("7) Iziet")
     return input("\nIzvēlies: ")
@@ -218,6 +220,29 @@ def filter_expenses_by_month(expenses):
 
 
 
+def show_summary_by_category(expenses):
+    """Display total expenses per category."""
+
+    if not expenses:
+        print("Nav datu.")
+        return
+
+    totals = sum_by_category(expenses)
+
+    print("\nKopsavilkums pa kategorijām:")
+    print("-" * 35)
+
+    for category, amount in totals.items():
+        print(f"{category:<20} {amount:>8.2f} EUR")
+
+    print("-" * 35)
+
+    # Total sum
+    total = sum_total(expenses)
+    print(f"KOPĀ: {total:.2f} EUR")
+
+
+
 
 def main():
     """Main program loop."""
@@ -235,6 +260,9 @@ def main():
 
         elif choice == "3":
             filter_expenses_by_month(expenses)
+
+        elif choice == "4":
+            show_summary_by_category(expenses)
 
         elif choice == "5":
             delete_expense(expenses)    
