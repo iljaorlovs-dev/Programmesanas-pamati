@@ -1,6 +1,7 @@
 from storage import load_expenses, save_expenses
 from logic import sum_total, is_valid_date
 from datetime import date
+from logic import get_available_months, filter_by_month
 
 # Predefined categories
 CATEGORIES = [
@@ -18,6 +19,8 @@ def show_menu():
     """Display menu and return user choice."""
     print("\n1) Pievienot izdevumu")
     print("2) Parādīt izdevumus")
+    print("3) Filtrēt pēc mēneša")
+    print("5) Dzēst izdevumu")
     print("7) Iziet")
     return input("\nIzvēlies: ")
 
@@ -166,6 +169,53 @@ def delete_expense(expenses):
             print("Nepareizs numurs!")
 
 
+def filter_expenses_by_month(expenses):
+    """Filter and display expenses by selected month."""
+
+    months = get_available_months(expenses)
+
+    if not months:
+        print("Nav datu.")
+        return
+
+    print("\nPieejamie mēneši:")
+    for i, m in enumerate(months, 1):
+        print(f"{i}) {m}")
+
+    while True:
+        choice = input("Izvēlies mēnesi: ").strip()
+
+        if not choice.isdigit():
+            print("Ievadi skaitli!")
+            continue
+
+        index = int(choice) - 1
+
+        if 0 <= index < len(months):
+            selected = months[index]
+            break
+        else:
+            print("Nepareiza izvēle!")
+
+    # Split year and month
+    year_str, month_str = selected.split("-")
+    year = int(year_str)
+    month = int(month_str)
+
+    # Filter data
+    filtered = filter_by_month(expenses, year, month)
+
+    print(f"\n{selected} izdevumi:")
+
+    if not filtered:
+        print("Nav datu.")
+        return
+
+    for e in filtered:
+        print(f"{e['date']} | {e['amount']:.2f} EUR | {e['category']} | {e['description']}")
+
+    print(f"\nKopā: {sum_total(filtered):.2f} EUR ({len(filtered)} ieraksti)")
+
 
 
 
@@ -182,6 +232,9 @@ def main():
 
         elif choice == "2":
             show_expenses(expenses)
+
+        elif choice == "3":
+            filter_expenses_by_month(expenses)
 
         elif choice == "5":
             delete_expense(expenses)    
